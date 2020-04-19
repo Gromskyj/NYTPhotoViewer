@@ -214,14 +214,23 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
 }
 
 - (void)configurePageViewControllerWithInitialPhoto {
-    NYTPhotoViewController *initialPhotoViewController;
+    UIViewController <NYTPhotoViewerContainer> *initialPhotoViewController;
 
     NSInteger initialPhotoIndex = [self.dataSource indexOfPhoto:self.initialPhoto];
+    
     if (self.initialPhoto != nil && initialPhotoIndex != NSNotFound) {
-        initialPhotoViewController = [self newPhotoViewControllerForPhoto:self.initialPhoto atIndex:initialPhotoIndex];
+        if ([self.dataSource isInterstitialViewAtIndex:initialPhotoIndex]){
+            initialPhotoViewController = [self newViewControllerAtIndex:initialPhotoIndex];
+        }else{
+            initialPhotoViewController = [self newPhotoViewControllerForPhoto:self.initialPhoto atIndex:initialPhotoIndex];
+        }
     }
     else {
-        initialPhotoViewController = [self newPhotoViewControllerForPhoto:[self.dataSource photoAtIndex:0] atIndex:0];
+        if ([self.dataSource isInterstitialViewAtIndex:initialPhotoIndex]){
+            initialPhotoViewController = [self newViewControllerAtIndex:0];
+        }else{
+            initialPhotoViewController = [self newPhotoViewControllerForPhoto:[self.dataSource photoAtIndex:0] atIndex:0];
+        }
     }
 
     [self setCurrentlyDisplayedViewController:initialPhotoViewController animated:NO];
@@ -523,7 +532,7 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
     return nil;
 }
 
-- (UIViewController *)newViewControllerAtIndex:(NSUInteger)index {
+- (UIViewController <NYTPhotoViewerContainer> *)newViewControllerAtIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(photosViewController:interstitialViewAtIndex:)]) {
         UIView *view = [self.delegate photosViewController:self interstitialViewAtIndex:index];
 

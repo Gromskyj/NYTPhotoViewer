@@ -2,6 +2,37 @@
 
 Changes for users of the library currently on `develop`:
 
+## [5.0.4](https://github.com/nytimes/NYTPhotoViewer/releases/tag/5.0.4)
+
+Changes for users of the library in 5.0.4:
+
+- Update PINRemoteImage to 3.0.1 for Xcode 12
+
+## [5.0.3](https://github.com/nytimes/NYTPhotoViewer/releases/tag/5.0.3)
+
+Changes for users of the library in 5.0.3:
+
+- Be more explicit with the PINRemoteImage dependency
+
+## [5.0.2](https://github.com/nytimes/NYTPhotoViewer/releases/tag/5.0.2)
+
+Changes for users of the library in 5.0.2:
+
+- Restore a method that was accidentally removed in 5.0.0. This prevented a long-tap gesture from displaying the 'Copy' menu.
+- Remove obsolete check for iOS 8.3.
+
+## [5.0.1](https://github.com/nytimes/NYTPhotoViewer/releases/tag/5.0.1)
+
+Changes for users of the library in 5.0.1:
+
+- bugfix: we weren't treating a nil interstitial correctly, so they weren't being skipped as intended.
+
+## [5.0.0](https://github.com/nytimes/NYTPhotoViewer/releases/tag/5.0.0)
+
+Changes for users of the library in 5.0.0:
+
+- Changed `NYTPhotosViewControllerDelegate` protocol  so that `- photosViewController:interstitialViewAtIndex:` can return nil.  If it does, that index is skipped and the following (or preceding) photo or interstitial view is displayed.
+
 ## [4.0.1](https://github.com/nytimes/NYTPhotoViewer/releases/tag/4.0.1)
 
 Changes for users of the library in 4.0.1:
